@@ -1,7 +1,7 @@
 Teletext
 ========
 
-A javascript rendition of everybody's favourite using of the vertical blanking interval. Currently supports subpages, reveal, and FASTEXT features of Level 1 teletext.
+A javascript rendition of everybody's favourite use of the vertical blanking interval. Currently supports subpages, reveal, and FASTEXT features of Level 1 teletext.
 
 TODO
 
