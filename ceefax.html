@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>CEEFAX TEST</title>
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="pages.js"></script>  
+        <script type="text/javascript" src="ceefax.js"></script>  
+     
+           <script type="text/javascript" charset="utf-8">
+          
+            var months = ["Jan", "Feb", "Mar", "Apr","May", "Jun","Jul","Aug"];
+            var days = ["Sun","Mon", "Tue","Wed","Thur","Fri","Sat"];
+            var fastext = ["red", "yellow", "green", "blue"];
+            var currentPage = 100;
+            var currentSubPage = 0;
+            var indexPage = 101;
+            var searching = false;
+            
+            var testColours = [["red", "white"],["blue", "yellow"]];
+           
+           
+            $(document).ready(function(){
+             
+              setInterval(update, 100);
+              setInterval(next_subpage, 10000);
+            
+              render_page('100',0);
+
+              $(".fastext_button").live('click', function(){
+                  currentPage = parseInt($(this).attr('page'));
+                  $("#currentPage").text($(this).attr('page'));
+                  currentSubPage = 0;
+                  searching = true;
+              });
+
+              $(document).bind('keypress',function (evt){ 
+                
+                
+                // REVEAL!
+                
+                if(evt.which == 114) {
+                  $(".reveal").each(function() {
+                    
+                    // Off, so switch on
+                    
+                    if ($(this).attr('reveal') == 'off') {
+                      $(this).css('background-color', $(this).attr('reveal-bg'));
+                      $(this).css('color', $(this).attr('reveal-fg'));   
+                      $(this).attr('reveal', 'on');                   
+                    } else {
+                      
+                      // Switch reveal off and everything to black again
+                      $(this).css('background-color', 'black');
+                      $(this).css('color', 'black');   
+                      $(this).attr('reveal', 'off');
+                      
+                    }
+                    
+                    
+                    
+                  });
+                }
+                
+                var code = evt.which - 48;
+                if(code >= 0 && code < 10) {
+                  if ($("#currentPage").text().length == 3) {
+                    $("#currentPage").text(code);
+                    $("#spacer").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    return;
+                  }
+                  
+                  if ($("#currentPage").text().length == 1) {
+                    $("#currentPage").text($("#currentPage").text() + code);
+                    $("#spacer").html("&nbsp;&nbsp;&nbsp;&nbsp;");
+                    return;
+                  }
+
+                  if ($("#currentPage").text().length == 2) {
+                    $("#currentPage").text($("#currentPage").text() + code);
+                    $("#spacer").html("&nbsp;&nbsp;&nbsp;");
+                    currentPage = parseInt($("#currentPage").text());
+                    indexPage = (Math.floor((parseInt($("#currentPage").text())) / 100) * 100) + Math.floor(Math.random()*99);
+                    searching = true;
+                    return;
+                  }
+ 
+                }
+              });         
+            });             
+
+            
+           
+
+           
+            </script>
+        
+    </head>
+    <body>
+      
+      <style>
+        @font-face { font-family: ModeSeven; src: url('mode.ttf'); 
+                    } 
+        
+        #teletext {width:59%;}
+        
+        body {
+          font-family: ModeSeven;
+           font-size: 18pt; 
+           background-color: black;
+           color: white;
+        }
+        
+        #title {
+          background-color: red;
+          color: white;
+        }
+        
+      </style>
+      
+   <div id="teletext">
+      
+      <div id="topLine">
+        P<span id="currentPage">100</span>
+        <span id="spacer">&nbsp;&nbsp;&nbsp;</span>
+        <span id="title">SNAPFAX</span>
+        <span> </span>
+        <span id="pageCycle">100</span>
+        <span id="date"></span>
+      </div>
+      
+      <div id="mainGrid">
+        <div id="line0"><span>a</span><span>a</span>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line1"><span>a</span><span>a</span>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line2">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line3">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line4">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line5">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line6">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line7">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line8">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line9">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line10">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line11">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line12">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line13">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line14">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line15">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line16">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line17">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line18">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line19">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line20">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line21">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="line22">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+<div id="fastext"></div>
+      </div>
+      </div>
+    </body>
+</html>
